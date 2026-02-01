@@ -23,7 +23,15 @@
           default = pkgs.mkShell {
             packages = [
               pkgs.nodejs_24
+              pkgs.zsh
             ];
+
+            shellHook = ''
+              if [ -z "$ZSH_VERSION" ]; then
+                export SHELL=${pkgs.zsh}/bin/zsh
+                exec ${pkgs.zsh}/bin/zsh -l
+              fi
+            '';
           };
         }
       );
