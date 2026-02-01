@@ -1,4 +1,23 @@
 services:
+  frontend:
+    container_name: ubcms-frontend
+    build:
+      context: ./frontend
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - STRAPI_INTERNAL_URL=http://strapi:1337
+      - PORT=3000
+    volumes:
+      - ./frontend:/app
+    ports:
+      - '3000:3000'
+    command: npm run dev
+    depends_on:
+      - strapi
+    networks:
+      - ubcms
+
   strapi:
     container_name: ubcms-strapi
     build:
