@@ -1,0 +1,56 @@
+services:
+  strapi:
+    container_name: ubcms-strapi
+    build:
+      context: ./backend
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      APP_KEYS: ${APP_KEYS}
+      NODE_ENV: ${NODE_ENV}
+    volumes:
+      - ./backend/config:/opt/app/config
+      - ./backend/src:/opt/app/src
+      - ./backend/package.json:/opt/package.json
+      - ./.env:/opt/app/.env
+      - ./backend/public/uploads:/opt/app/public/uploads
+    ports:
+      - '1337:1337'
+    networks:
+      - ubcms
+    depends_on:
+      - strapiDB
+
+  strapiDB:
+    container_name: ubcms-strapi-db
+    restart: unless-stopped
+    env_file: .env
+    image: postgres:17.7
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - strapi-data:/var/lib/postgresql/data
+      - ./backend/database/ubcms_dump.sql:/docker-entrypoint-initdb.d/ubcms_dump.sql
+    ports:
+      - '5433:5432'
+    networks:
+      - ubcms
+
+volumes:
+  strapi-data:
+    name: ubcms-strapi-data
+
+networks:
+  ubcms:
+    name: ubcms
+    driver: bridge
