@@ -8,8 +8,6 @@ services:
     environment:
       - STRAPI_INTERNAL_URL=http://strapi:1337
       - PORT=3000
-    volumes:
-      - ./frontend:/app
     ports:
       - '3000:3000'
     command: npm run dev
