@@ -11,6 +11,9 @@ export default async function HomePage() {
     <div>
       <h1>{global.title}</h1>
       <p>{global.description}</p>
+      <div>
+          Future UBCMS Project
+      </div>
     </div>
   );
 }
