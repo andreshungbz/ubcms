@@ -30,6 +30,7 @@ Then develop as normal in the `frontend/` directory:
 
 ```
 cd frontend
+npm install
 npm run dev
 ```
 
