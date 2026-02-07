@@ -1,10 +1,10 @@
-// frontend/app/api/ping-strapi/route.ts
+// frontend/app/api/ping/route.ts
 
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const res = await fetch(`${process.env.STRAPI_INTERNAL_URL}`, {
+    const res = await fetch(`${process.env.DIRECTUS_API_URL}`, {
       redirect: 'manual',
     });
 
@@ -14,7 +14,7 @@ export async function GET() {
 
     return NextResponse.json({
       status: 'ok',
-      strapiStatus: res.status,
+      directusStatus: res.status,
     });
   } catch (err) {
     return NextResponse.json(

@@ -4,7 +4,7 @@
 
 TODO
 
-## Backend (Strapi + PostgreSQL)
+## Backend (Directus + PostgreSQL)
 
 TODO
 
@@ -20,13 +20,13 @@ cp .env.example .env
 
 ### Working on the Frontend
 
-Start only the backend services:
+Start the backend services:
 
 ```
-docker compose up strapi
+make db
 ```
 
-Then develop as normal in the `frontend/` directory:
+Then develop in the `frontend/` directory:
 
 ```
 cd frontend
@@ -36,27 +36,29 @@ npm run dev
 
 ### Working on the Backend
 
-Use the Strapi Admin interface in the browser when working on the schema and data (`http://localhost:1337/admin`).
+Start the backend services:
+
+```
+make db
+```
+
+Use the Directus Admin interface in the browser when working on the schema and data (`http://localhost:8055`).
 
 | Key      | Value                |
 | -------- | -------------------- |
 | Email    | 2018118240@ub.edu.bz |
 | Password | UBCMS-25s2           |
 
-After making schema changes or adding content data, update the `backend/database/ubcms_dump.sql`, which is used to initialize the PostgreSQL database with the example data:
+After making schema changes or adding content data, update the `backend/database/ubcms.sql` file, which is used to initialize the PostgreSQL database with the example data:
 
 ```
-docker exec -t ubcms-strapi-db env PGPASSWORD=UBCMS-25s2 pg_dump -U ubcms_user -d ubcms -F p -E UTF-8 > backend/database/ubcms_dump.sql
+make backup
 ```
 
-### Configuration Changes
-
-Run the following commands after making changes to the Strapi backend code configuration, pulling in changes to `backend/database/ubcms_dump.sql`, or modifying the `compose.yaml` or `Dockerfile` files:
+You can do a quick reset of the database to ensure the backup file works as intended:
 
 ```
-docker compose down
-docker volume rm ubcms-strapi-data
-docker compose up strapi --build
+make reset-db
 ```
 
 ### Single-command Project Testing
@@ -64,5 +66,5 @@ docker compose up strapi --build
 The following command starts the backend services and builds the Nextjs frontend. This is mostly a convenient command for testing.
 
 ```
-docker compose up
+make
 ```
