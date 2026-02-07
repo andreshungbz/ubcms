@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict OnQ1NmIxPpNj6YEu587ejPycrL7YAlabIxyLGBrcludQWdcmsflpZGMtitH4ahB
+\restrict fFMU1azp2BGKqpJfoZU1Nqzrx3WMLQDS8cDeJw4EsqJsicnxHFDFgv1baBH140R
 
 -- Dumped from database version 18.1 (Debian 18.1-1.pgdg13+2)
 -- Dumped by pg_dump version 18.1 (Debian 18.1-1.pgdg13+2)
@@ -834,6 +834,41 @@ CREATE TABLE public.directus_versions (
 ALTER TABLE public.directus_versions OWNER TO directus;
 
 --
+-- Name: global; Type: TABLE; Schema: public; Owner: directus
+--
+
+CREATE TABLE public.global (
+    id integer NOT NULL,
+    description text,
+    title text
+);
+
+
+ALTER TABLE public.global OWNER TO directus;
+
+--
+-- Name: global_id_seq; Type: SEQUENCE; Schema: public; Owner: directus
+--
+
+CREATE SEQUENCE public.global_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.global_id_seq OWNER TO directus;
+
+--
+-- Name: global_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: directus
+--
+
+ALTER SEQUENCE public.global_id_seq OWNED BY public.global.id;
+
+
+--
 -- Name: test; Type: TABLE; Schema: public; Owner: directus
 --
 
@@ -928,6 +963,13 @@ ALTER TABLE ONLY public.directus_settings ALTER COLUMN id SET DEFAULT nextval('p
 
 
 --
+-- Name: global id; Type: DEFAULT; Schema: public; Owner: directus
+--
+
+ALTER TABLE ONLY public.global ALTER COLUMN id SET DEFAULT nextval('public.global_id_seq'::regclass);
+
+
+--
 -- Name: test id; Type: DEFAULT; Schema: public; Owner: directus
 --
 
@@ -961,6 +1003,23 @@ COPY public.directus_activity (id, action, "user", "timestamp", ip, user_agent, 
 10	login	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 21:13:13.993+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_users	6df37e34-deee-430c-a204-5d03a633cfe3	http://0.0.0.0:8055
 11	create	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 21:14:13.884+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_users	80738d3a-7fe0-4092-b0d3-d9058c8582ab	http://0.0.0.0:8055
 12	login	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 21:30:41.249+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_users	6df37e34-deee-430c-a204-5d03a633cfe3	http://0.0.0.0:8055
+13	update	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 22:00:04.492+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_settings	1	http://0.0.0.0:8055
+14	update	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 22:09:44.266+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_settings	1	http://0.0.0.0:8055
+15	delete	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 22:21:46.044+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_users	80738d3a-7fe0-4092-b0d3-d9058c8582ab	http://0.0.0.0:8055
+16	create	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 22:48:58.545+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_fields	7	http://0.0.0.0:8055
+17	create	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 22:48:58.548+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_collections	global	http://0.0.0.0:8055
+18	create	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 22:49:31.163+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_fields	8	http://0.0.0.0:8055
+19	create	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 22:49:47.649+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_fields	9	http://0.0.0.0:8055
+20	delete	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 22:50:08.707+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_fields	8	http://0.0.0.0:8055
+21	create	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 22:50:16.123+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_fields	10	http://0.0.0.0:8055
+22	update	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 22:50:17.76+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_fields	7	http://0.0.0.0:8055
+23	update	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 22:50:17.763+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_fields	10	http://0.0.0.0:8055
+24	update	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 22:50:17.766+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_fields	9	http://0.0.0.0:8055
+25	create	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 22:51:22.678+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	global	1	http://0.0.0.0:8055
+26	create	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 22:51:53.692+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_permissions	1	http://0.0.0.0:8055
+27	update	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 22:51:53.697+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_policies	abf8a154-5b1c-4a46-ac9c-7300570f4f17	http://0.0.0.0:8055
+28	update	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 23:10:29.046+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_users	6df37e34-deee-430c-a204-5d03a633cfe3	http://0.0.0.0:8055
+29	update	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 23:11:31.668+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	directus_users	6df37e34-deee-430c-a204-5d03a633cfe3	http://0.0.0.0:8055
 \.
 
 
@@ -970,6 +1029,7 @@ COPY public.directus_activity (id, action, "user", "timestamp", ip, user_agent, 
 
 COPY public.directus_collections (collection, icon, note, display_template, hidden, singleton, translations, archive_field, archive_app_filter, archive_value, unarchive_value, sort_field, accountability, color, item_duplication_fields, sort, "group", collapse, preview_url, versioning) FROM stdin;
 test	\N	\N	\N	f	f	\N	status	t	archived	draft	\N	all	\N	\N	\N	\N	open	\N	f
+global	\N	\N	\N	f	t	\N	\N	t	\N	\N	\N	all	\N	\N	\N	\N	open	\N	f
 \.
 
 
@@ -1032,6 +1092,9 @@ COPY public.directus_fields (id, collection, field, special, interface, options,
 4	test	date_created	date-created	datetime	\N	datetime	{"relative":true}	t	t	4	half	\N	\N	\N	f	\N	\N	\N	t
 5	test	user_updated	user-updated	select-dropdown-m2o	{"template":"{{avatar}} {{first_name}} {{last_name}}"}	user	\N	t	t	5	half	\N	\N	\N	f	\N	\N	\N	t
 6	test	date_updated	date-updated	datetime	\N	datetime	{"relative":true}	t	t	6	half	\N	\N	\N	f	\N	\N	\N	t
+7	global	id	\N	input	\N	\N	\N	t	t	1	full	\N	\N	\N	f	\N	\N	\N	t
+10	global	title	\N	input	\N	\N	\N	f	f	2	full	\N	\N	\N	f	\N	\N	\N	t
+9	global	description	\N	input	\N	\N	\N	f	f	3	full	\N	\N	\N	f	\N	\N	\N	t
 \.
 
 
@@ -1196,6 +1259,7 @@ COPY public.directus_panels (id, dashboard, name, icon, color, show_header, note
 --
 
 COPY public.directus_permissions (id, collection, action, permissions, validation, presets, fields, policy) FROM stdin;
+1	global	read	\N	\N	\N	*	abf8a154-5b1c-4a46-ac9c-7300570f4f17
 \.
 
 
@@ -1242,6 +1306,20 @@ COPY public.directus_revisions (id, activity, collection, item, data, delta, par
 7	8	directus_fields	6	{"sort":6,"special":["date-updated"],"interface":"datetime","readonly":true,"hidden":true,"width":"half","display":"datetime","display_options":{"relative":true},"field":"date_updated","collection":"test"}	{"sort":6,"special":["date-updated"],"interface":"datetime","readonly":true,"hidden":true,"width":"half","display":"datetime","display_options":{"relative":true},"field":"date_updated","collection":"test"}	\N	\N
 8	9	directus_collections	test	{"archive_field":"status","archive_value":"archived","unarchive_value":"draft","singleton":false,"collection":"test"}	{"archive_field":"status","archive_value":"archived","unarchive_value":"draft","singleton":false,"collection":"test"}	\N	\N
 9	11	directus_users	80738d3a-7fe0-4092-b0d3-d9058c8582ab	{"role":"52ecbeb9-2a02-4144-8461-15682953beff","first_name":"Test","last_name":"Test","email":"test@example.com","password":"**********"}	{"role":"52ecbeb9-2a02-4144-8461-15682953beff","first_name":"Test","last_name":"Test","email":"test@example.com","password":"**********"}	\N	\N
+10	13	directus_settings	1	{"id":1,"project_name":"Directus","project_url":null,"project_color":"#6644FF","project_logo":null,"public_foreground":null,"public_background":null,"public_note":null,"auth_login_attempts":25,"auth_password_policy":null,"storage_asset_transform":"all","storage_asset_presets":null,"custom_css":null,"storage_default_folder":null,"basemaps":null,"mapbox_key":null,"module_bar":[{"type":"module","id":"content","enabled":true},{"type":"module","id":"visual","enabled":true},{"type":"module","id":"users","enabled":true},{"type":"module","id":"files","enabled":true},{"type":"module","id":"insights","enabled":true},{"type":"module","id":"deployments","enabled":false},{"type":"link","id":"docs","name":"Documentation","url":"https://docs.directus.io","icon":"help","enabled":true},{"type":"module","id":"settings","enabled":true,"locked":true}],"project_descriptor":null,"default_language":"en-US","custom_aspect_ratios":null,"public_favicon":null,"default_appearance":"auto","default_theme_light":null,"theme_light_overrides":null,"default_theme_dark":null,"theme_dark_overrides":null,"report_error_url":null,"report_bug_url":null,"report_feature_url":null,"public_registration":false,"public_registration_verify_email":true,"public_registration_role":null,"public_registration_email_filter":null,"visual_editor_urls":null,"project_id":"019c39ee-c27b-73bd-a25f-02a0b1e83eaf","mcp_enabled":false,"mcp_allow_deletes":false,"mcp_prompts_collection":null,"mcp_system_prompt_enabled":true,"mcp_system_prompt":null,"project_owner":"2018118240@ub.edu.bz","project_usage":"personal","org_name":null,"product_updates":false,"project_status":null,"ai_openai_api_key":null,"ai_anthropic_api_key":null,"ai_system_prompt":null,"ai_google_api_key":null,"ai_openai_compatible_api_key":null,"ai_openai_compatible_base_url":null,"ai_openai_compatible_name":null,"ai_openai_compatible_models":null,"ai_openai_compatible_headers":null,"ai_openai_allowed_models":["gpt-5-nano","gpt-5-mini","gpt-5"],"ai_anthropic_allowed_models":["claude-haiku-4-5","claude-sonnet-4-5"],"ai_google_allowed_models":["gemini-3-pro-preview","gemini-3-flash-preview","gemini-2.5-pro","gemini-2.5-flash"],"collaborative_editing_enabled":false}	{"module_bar":[{"type":"module","id":"content","enabled":true},{"type":"module","id":"visual","enabled":true},{"type":"module","id":"users","enabled":true},{"type":"module","id":"files","enabled":true},{"type":"module","id":"insights","enabled":true},{"type":"module","id":"deployments","enabled":false},{"type":"link","id":"docs","name":"Documentation","url":"https://docs.directus.io","icon":"help","enabled":true},{"type":"module","id":"settings","enabled":true,"locked":true}]}	\N	\N
+11	14	directus_settings	1	{"id":1,"project_name":"Directus","project_url":null,"project_color":"#6644FF","project_logo":null,"public_foreground":null,"public_background":null,"public_note":null,"auth_login_attempts":25,"auth_password_policy":null,"storage_asset_transform":"all","storage_asset_presets":null,"custom_css":null,"storage_default_folder":null,"basemaps":null,"mapbox_key":null,"module_bar":[{"type":"module","id":"content","enabled":true},{"type":"module","id":"visual","enabled":false},{"type":"module","id":"users","enabled":true},{"type":"module","id":"files","enabled":true},{"type":"module","id":"insights","enabled":true},{"type":"module","id":"deployments","enabled":false},{"type":"link","id":"docs","name":"Documentation","url":"https://docs.directus.io","icon":"help","enabled":true},{"type":"module","id":"settings","enabled":true,"locked":true}],"project_descriptor":null,"default_language":"en-US","custom_aspect_ratios":null,"public_favicon":null,"default_appearance":"auto","default_theme_light":null,"theme_light_overrides":null,"default_theme_dark":null,"theme_dark_overrides":null,"report_error_url":null,"report_bug_url":null,"report_feature_url":null,"public_registration":false,"public_registration_verify_email":true,"public_registration_role":null,"public_registration_email_filter":null,"visual_editor_urls":null,"project_id":"019c39ee-c27b-73bd-a25f-02a0b1e83eaf","mcp_enabled":false,"mcp_allow_deletes":false,"mcp_prompts_collection":null,"mcp_system_prompt_enabled":true,"mcp_system_prompt":null,"project_owner":"2018118240@ub.edu.bz","project_usage":"personal","org_name":null,"product_updates":false,"project_status":null,"ai_openai_api_key":null,"ai_anthropic_api_key":null,"ai_system_prompt":null,"ai_google_api_key":null,"ai_openai_compatible_api_key":null,"ai_openai_compatible_base_url":null,"ai_openai_compatible_name":null,"ai_openai_compatible_models":null,"ai_openai_compatible_headers":null,"ai_openai_allowed_models":["gpt-5-nano","gpt-5-mini","gpt-5"],"ai_anthropic_allowed_models":["claude-haiku-4-5","claude-sonnet-4-5"],"ai_google_allowed_models":["gemini-3-pro-preview","gemini-3-flash-preview","gemini-2.5-pro","gemini-2.5-flash"],"collaborative_editing_enabled":false}	{"module_bar":[{"type":"module","id":"content","enabled":true},{"type":"module","id":"visual","enabled":false},{"type":"module","id":"users","enabled":true},{"type":"module","id":"files","enabled":true},{"type":"module","id":"insights","enabled":true},{"type":"module","id":"deployments","enabled":false},{"type":"link","id":"docs","name":"Documentation","url":"https://docs.directus.io","icon":"help","enabled":true},{"type":"module","id":"settings","enabled":true,"locked":true}]}	\N	\N
+12	16	directus_fields	7	{"sort":1,"hidden":true,"interface":"input","readonly":true,"field":"id","collection":"global"}	{"sort":1,"hidden":true,"interface":"input","readonly":true,"field":"id","collection":"global"}	\N	\N
+13	17	directus_collections	global	{"singleton":true,"collection":"global"}	{"singleton":true,"collection":"global"}	\N	\N
+14	18	directus_fields	8	{"sort":2,"interface":"input","special":null,"collection":"global","field":"title"}	{"sort":2,"interface":"input","special":null,"collection":"global","field":"title"}	\N	\N
+15	19	directus_fields	9	{"sort":3,"interface":"input","special":null,"collection":"global","field":"description"}	{"sort":3,"interface":"input","special":null,"collection":"global","field":"description"}	\N	\N
+16	21	directus_fields	10	{"sort":4,"interface":"input","special":null,"collection":"global","field":"title"}	{"sort":4,"interface":"input","special":null,"collection":"global","field":"title"}	\N	\N
+17	22	directus_fields	7	{"id":7,"collection":"global","field":"id","special":null,"interface":"input","options":null,"display":null,"display_options":null,"readonly":true,"hidden":true,"sort":1,"width":"full","translations":null,"note":null,"conditions":null,"required":false,"group":null,"validation":null,"validation_message":null,"searchable":true}	{"collection":"global","field":"id","sort":1,"group":null}	\N	\N
+18	23	directus_fields	10	{"id":10,"collection":"global","field":"title","special":null,"interface":"input","options":null,"display":null,"display_options":null,"readonly":false,"hidden":false,"sort":2,"width":"full","translations":null,"note":null,"conditions":null,"required":false,"group":null,"validation":null,"validation_message":null,"searchable":true}	{"collection":"global","field":"title","sort":2,"group":null}	\N	\N
+19	24	directus_fields	9	{"id":9,"collection":"global","field":"description","special":null,"interface":"input","options":null,"display":null,"display_options":null,"readonly":false,"hidden":false,"sort":3,"width":"full","translations":null,"note":null,"conditions":null,"required":false,"group":null,"validation":null,"validation_message":null,"searchable":true}	{"collection":"global","field":"description","sort":3,"group":null}	\N	\N
+20	25	global	1	{"title":"University of Belize Club Management System","description":"An online interface for connecting students with clubs"}	{"title":"University of Belize Club Management System","description":"An online interface for connecting students with clubs"}	\N	\N
+21	26	directus_permissions	1	{"policy":"abf8a154-5b1c-4a46-ac9c-7300570f4f17","permissions":null,"validation":null,"fields":["*"],"presets":null,"collection":"global","action":"read"}	{"policy":"abf8a154-5b1c-4a46-ac9c-7300570f4f17","permissions":null,"validation":null,"fields":["*"],"presets":null,"collection":"global","action":"read"}	\N	\N
+22	28	directus_users	6df37e34-deee-430c-a204-5d03a633cfe3	{"id":"6df37e34-deee-430c-a204-5d03a633cfe3","first_name":"Admin","last_name":"User","email":"2018118240@ub.edu.bz","password":"**********","location":null,"title":null,"description":null,"tags":null,"avatar":null,"language":null,"tfa_secret":null,"status":"active","role":"52ecbeb9-2a02-4144-8461-15682953beff","token":"**********","last_access":"2026-02-07T23:05:31.175Z","last_page":"/users/6df37e34-deee-430c-a204-5d03a633cfe3","provider":"default","external_identifier":null,"auth_data":null,"email_notifications":true,"appearance":null,"theme_dark":null,"theme_light":null,"theme_light_overrides":null,"theme_dark_overrides":null,"text_direction":"auto","policies":[]}	{"token":"**********"}	\N	\N
+23	29	directus_users	6df37e34-deee-430c-a204-5d03a633cfe3	{"id":"6df37e34-deee-430c-a204-5d03a633cfe3","first_name":"Admin","last_name":"User","email":"2018118240@ub.edu.bz","password":"**********","location":null,"title":null,"description":null,"tags":null,"avatar":null,"language":null,"tfa_secret":null,"status":"active","role":"52ecbeb9-2a02-4144-8461-15682953beff","token":"**********","last_access":"2026-02-07T23:05:31.175Z","last_page":"/users/6df37e34-deee-430c-a204-5d03a633cfe3","provider":"default","external_identifier":null,"auth_data":null,"email_notifications":true,"appearance":null,"theme_dark":null,"theme_light":null,"theme_light_overrides":null,"theme_dark_overrides":null,"text_direction":"auto","policies":[]}	{"token":"**********"}	\N	\N
 \.
 
 
@@ -1261,7 +1339,8 @@ COPY public.directus_roles (id, name, icon, description, parent) FROM stdin;
 COPY public.directus_sessions (token, "user", expires, ip, user_agent, share, origin, next_token) FROM stdin;
 nem3BRWJ4yab2t0KtXnlXSszZnwx5musP3hO_RnfbZxmMv_Zv1_ZGAw333yeBLgn	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-14 21:08:05.121+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	\N	http://0.0.0.0:8055	\N
 UHctBMFvZmbbJzasNS7lBMwxTW-sBEqs8W7d2jiyah6Lb3eORKoGsZfgWhG5FxU8	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-14 21:13:13.979+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	\N	http://0.0.0.0:8055	\N
-QLikrmIsT78tMiaw9f_ojUMFNo55eyrdDl9Jg0UkRjAJJUHz0fXWNQrv_Fqr-xEP	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-14 21:30:41.235+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	\N	http://0.0.0.0:8055	\N
+W-UYU8EOULVj51HTTOllvnXF9DlKpSj6AFTyXmjdyrotgYobwrcLh_iSmDT2Q6V9	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-07 23:05:41.163+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	\N	http://0.0.0.0:8055	zI85wp1qEINC08CxYCf_jiEoLilm27FGzlkRziX71JcP-RLdayD00-Kn0qLVY8nD
+zI85wp1qEINC08CxYCf_jiEoLilm27FGzlkRziX71JcP-RLdayD00-Kn0qLVY8nD	6df37e34-deee-430c-a204-5d03a633cfe3	2026-02-08 23:05:31.163+00	172.18.0.1	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0	\N	http://0.0.0.0:8055	\N
 \.
 
 
@@ -1270,7 +1349,7 @@ QLikrmIsT78tMiaw9f_ojUMFNo55eyrdDl9Jg0UkRjAJJUHz0fXWNQrv_Fqr-xEP	6df37e34-deee-4
 --
 
 COPY public.directus_settings (id, project_name, project_url, project_color, project_logo, public_foreground, public_background, public_note, auth_login_attempts, auth_password_policy, storage_asset_transform, storage_asset_presets, custom_css, storage_default_folder, basemaps, mapbox_key, module_bar, project_descriptor, default_language, custom_aspect_ratios, public_favicon, default_appearance, default_theme_light, theme_light_overrides, default_theme_dark, theme_dark_overrides, report_error_url, report_bug_url, report_feature_url, public_registration, public_registration_verify_email, public_registration_role, public_registration_email_filter, visual_editor_urls, project_id, mcp_enabled, mcp_allow_deletes, mcp_prompts_collection, mcp_system_prompt_enabled, mcp_system_prompt, project_owner, project_usage, org_name, product_updates, project_status, ai_openai_api_key, ai_anthropic_api_key, ai_system_prompt, ai_google_api_key, ai_openai_compatible_api_key, ai_openai_compatible_base_url, ai_openai_compatible_name, ai_openai_compatible_models, ai_openai_compatible_headers, ai_openai_allowed_models, ai_anthropic_allowed_models, ai_google_allowed_models, collaborative_editing_enabled) FROM stdin;
-1	Directus	\N	#6644FF	\N	\N	\N	\N	25	\N	all	\N	\N	\N	\N	\N	\N	\N	en-US	\N	\N	auto	\N	\N	\N	\N	\N	\N	\N	f	t	\N	\N	\N	019c39ee-c27b-73bd-a25f-02a0b1e83eaf	f	f	\N	t	\N	2018118240@ub.edu.bz	personal	\N	f	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	["gpt-5-nano","gpt-5-mini","gpt-5"]	["claude-haiku-4-5","claude-sonnet-4-5"]	["gemini-3-pro-preview","gemini-3-flash-preview","gemini-2.5-pro","gemini-2.5-flash"]	f
+1	Directus	\N	#6644FF	\N	\N	\N	\N	25	\N	all	\N	\N	\N	\N	\N	[{"type":"module","id":"content","enabled":true},{"type":"module","id":"visual","enabled":false},{"type":"module","id":"users","enabled":true},{"type":"module","id":"files","enabled":true},{"type":"module","id":"insights","enabled":true},{"type":"module","id":"deployments","enabled":false},{"type":"link","id":"docs","name":"Documentation","url":"https://docs.directus.io","icon":"help","enabled":true},{"type":"module","id":"settings","enabled":true,"locked":true}]	\N	en-US	\N	\N	auto	\N	\N	\N	\N	\N	\N	\N	f	t	\N	\N	\N	019c39ee-c27b-73bd-a25f-02a0b1e83eaf	f	f	\N	t	\N	2018118240@ub.edu.bz	personal	\N	f	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	["gpt-5-nano","gpt-5-mini","gpt-5"]	["claude-haiku-4-5","claude-sonnet-4-5"]	["gemini-3-pro-preview","gemini-3-flash-preview","gemini-2.5-pro","gemini-2.5-flash"]	f
 \.
 
 
@@ -1295,8 +1374,7 @@ COPY public.directus_translations (id, language, key, value) FROM stdin;
 --
 
 COPY public.directus_users (id, first_name, last_name, email, password, location, title, description, tags, avatar, language, tfa_secret, status, role, token, last_access, last_page, provider, external_identifier, auth_data, email_notifications, appearance, theme_dark, theme_light, theme_light_overrides, theme_dark_overrides, text_direction) FROM stdin;
-80738d3a-7fe0-4092-b0d3-d9058c8582ab	Test	Test	test@example.com	$argon2id$v=19$m=65536,t=3,p=4$hYGvp+C1sCzt9Xfa+cRdHw$NQSe+HCJnRn36Uy79tXGMrKtDc+3Ad17tdPfiKtBr2g	\N	\N	\N	\N	\N	\N	\N	active	52ecbeb9-2a02-4144-8461-15682953beff	\N	\N	\N	default	\N	\N	t	\N	\N	\N	\N	\N	auto
-6df37e34-deee-430c-a204-5d03a633cfe3	Admin	User	2018118240@ub.edu.bz	$argon2id$v=19$m=65536,t=3,p=4$GpSKw75GcVboM8V58oN6zA$KXaEKEz1EpHAYGG+eDMSwFaIfaOplb7PDJrA+O6kbQY	\N	\N	\N	\N	\N	\N	\N	active	52ecbeb9-2a02-4144-8461-15682953beff	\N	2026-02-07 21:30:41.251+00	/users	default	\N	\N	t	\N	\N	\N	\N	\N	auto
+6df37e34-deee-430c-a204-5d03a633cfe3	Admin	User	2018118240@ub.edu.bz	$argon2id$v=19$m=65536,t=3,p=4$GpSKw75GcVboM8V58oN6zA$KXaEKEz1EpHAYGG+eDMSwFaIfaOplb7PDJrA+O6kbQY	\N	\N	\N	\N	\N	\N	\N	active	52ecbeb9-2a02-4144-8461-15682953beff	tXLsKuQHGCPgxQAu7lD9S1Jx9UX84wN9	2026-02-07 23:05:31.175+00	/users/6df37e34-deee-430c-a204-5d03a633cfe3	default	\N	\N	t	\N	\N	\N	\N	\N	auto
 \.
 
 
@@ -1305,6 +1383,15 @@ COPY public.directus_users (id, first_name, last_name, email, password, location
 --
 
 COPY public.directus_versions (id, key, name, collection, item, hash, date_created, date_updated, user_created, user_updated, delta) FROM stdin;
+\.
+
+
+--
+-- Data for Name: global; Type: TABLE DATA; Schema: public; Owner: directus
+--
+
+COPY public.global (id, description, title) FROM stdin;
+1	An online interface for connecting students with clubs	University of Belize Club Management System
 \.
 
 
@@ -1320,14 +1407,14 @@ COPY public.test (id, status, user_created, date_created, user_updated, date_upd
 -- Name: directus_activity_id_seq; Type: SEQUENCE SET; Schema: public; Owner: directus
 --
 
-SELECT pg_catalog.setval('public.directus_activity_id_seq', 12, true);
+SELECT pg_catalog.setval('public.directus_activity_id_seq', 29, true);
 
 
 --
 -- Name: directus_fields_id_seq; Type: SEQUENCE SET; Schema: public; Owner: directus
 --
 
-SELECT pg_catalog.setval('public.directus_fields_id_seq', 6, true);
+SELECT pg_catalog.setval('public.directus_fields_id_seq', 10, true);
 
 
 --
@@ -1341,7 +1428,7 @@ SELECT pg_catalog.setval('public.directus_notifications_id_seq', 1, false);
 -- Name: directus_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: directus
 --
 
-SELECT pg_catalog.setval('public.directus_permissions_id_seq', 1, false);
+SELECT pg_catalog.setval('public.directus_permissions_id_seq', 1, true);
 
 
 --
@@ -1362,7 +1449,7 @@ SELECT pg_catalog.setval('public.directus_relations_id_seq', 2, true);
 -- Name: directus_revisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: directus
 --
 
-SELECT pg_catalog.setval('public.directus_revisions_id_seq', 9, true);
+SELECT pg_catalog.setval('public.directus_revisions_id_seq', 23, true);
 
 
 --
@@ -1370,6 +1457,13 @@ SELECT pg_catalog.setval('public.directus_revisions_id_seq', 9, true);
 --
 
 SELECT pg_catalog.setval('public.directus_settings_id_seq', 1, true);
+
+
+--
+-- Name: global_id_seq; Type: SEQUENCE SET; Schema: public; Owner: directus
+--
+
+SELECT pg_catalog.setval('public.global_id_seq', 1, true);
 
 
 --
@@ -1673,6 +1767,14 @@ ALTER TABLE ONLY public.directus_users
 
 ALTER TABLE ONLY public.directus_versions
     ADD CONSTRAINT directus_versions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: global global_pkey; Type: CONSTRAINT; Schema: public; Owner: directus
+--
+
+ALTER TABLE ONLY public.global
+    ADD CONSTRAINT global_pkey PRIMARY KEY (id);
 
 
 --
@@ -2100,5 +2202,5 @@ ALTER TABLE ONLY public.test
 -- PostgreSQL database dump complete
 --
 
-\unrestrict OnQ1NmIxPpNj6YEu587ejPycrL7YAlabIxyLGBrcludQWdcmsflpZGMtitH4ahB
+\unrestrict fFMU1azp2BGKqpJfoZU1Nqzrx3WMLQDS8cDeJw4EsqJsicnxHFDFgv1baBH140R
 
