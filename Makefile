@@ -36,22 +36,8 @@ backup:
 
 reset-db:
 	@echo "$(PREFIX) Resetting database volume..."
-	@$(COMPOSE) down
+	@$(COMPOSE) down --remove-orphans
 	@docker volume rm ubcms-directus-data || true
 
-	@echo "$(PREFIX) Starting database service only..."
+	@echo "$(PREFIX) Starting database service (fresh init)..."
 	@$(COMPOSE) up -d $(DB_SERVICE) --build
-
-	@echo "$(PREFIX) Waiting for database to be ready..."
-	@until $(COMPOSE) exec -T $(DB_SERVICE) pg_isready -U $(DB_USER) > /dev/null 2>&1; do \
-		sleep 1; \
-	done
-
-	@echo "$(PREFIX) Restoring database from $(BACKUP_FILE)..."
-	@cat $(BACKUP_FILE) | $(COMPOSE) exec -T $(DB_SERVICE) \
-		psql -U $(DB_USER) -d $(DB_NAME)
-
-	@echo "$(PREFIX) Shutting down database service..."
-	@$(COMPOSE) down
-
-	@echo "$(PREFIX) Database reset and restored successfully."
